@@ -1,0 +1,20 @@
+##### clamav
+  xshokclamav:
+    image: extremeshok/clamav:latest
+    expose:
+      - "3310"
+    volumes:
+      - vol-clamav:/data
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ}
+    dns:
+      - ${IPV4_NETWORK:-172.22.1}.254
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=${SYSCTL_IPV6_DISABLED:-0}
+    networks:
+      network:
+        ipv4_address: ${IPV4_NETWORK:-172.22.1}.205
+        aliases:
+          - antivirus
+          - clamav

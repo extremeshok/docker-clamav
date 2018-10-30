@@ -1,0 +1,2 @@
+### Setup Cron to run freshclam every hour
+0 * * * * freshclam --user=clamav --verbose --log=/var/log/clamav/freshclam.log >/dev/null 2>&1
