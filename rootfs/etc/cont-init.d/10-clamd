@@ -11,11 +11,10 @@ chown -R clamav:clamav /data
 mkdir -p /var/log/clamav
 chown -R clamav:clamav /var/log/clamav
 
-### Check for Definitions
-if [ ! -f /data/main.cvd  ]; then
-  echo '** [clamav] No Definitions Found, Downloading..'
-  freshclam --user=clamav --verbose --show-progress --log=/var/log/clamav/freshclam.log
-fi
+### Update Definitions
+echo '** [freshclam] Updating Definitions ..'
+freshclam --user=clamav --verbose --show-progress --config-file=/etc/clamav/freshclam.conf --log=/var/log/clamav/freshclam.log
+
 
 mkdir -p /tmp/state
 touch /tmp/state/10-clamd-init
